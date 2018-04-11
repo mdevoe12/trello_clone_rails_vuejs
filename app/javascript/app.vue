@@ -1,6 +1,6 @@
 <template>
-  <draggable v-model="lists" :options="{group: 'lists'}" class="row dragArea" @end="listMoved">
-    <div v-for="(list, index) in lists" class="col-3">
+  <draggable v-model="lists" :options="{group: 'lists'}" class="board dragArea" @end="listMoved">
+    <div v-for="(list, index) in lists" class="list">
       <h6>{{ list.name }}</h6>
       <hr />
       
@@ -98,11 +98,21 @@ export default {
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
 .dragArea {
   min-height: 20px;
 }
+.board {
+  overflow-x: auto;;
+  white-space: nowrap;
+}
+.list {
+  background: #E2E4E6;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: 20px;
+  padding: 10px;
+  vertical-align: top;
+  width: 270px;
+}
+
 </style>
