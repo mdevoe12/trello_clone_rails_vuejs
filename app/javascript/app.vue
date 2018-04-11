@@ -2,7 +2,6 @@
   <draggable v-model="lists" :options="{group: 'lists'}" class="board dragArea" @end="listMoved">
     <div v-for="(list, index) in lists" class="list">
       <h6>{{ list.name }}</h6>
-      <hr />
       
       <draggable v-model="list.cards" :options="{group: 'cards'}" class="dragArea" @change="cardMoved">
         <div v-for="(card, index) in list.cards" class="card card-body mb-3">
@@ -10,10 +9,8 @@
         </div>
       </draggable>
 
-      <div class="card card-body">
-        <textarea v-model="messages[list.id]" class="form-control"></textarea>
-        <button v-on:click="submitMessages(list.id)" class="btn btn-secondary">Add</button>
-      </div>
+      <textarea v-model="messages[list.id]" class="form-control mb-1"></textarea>
+      <button v-on:click="submitMessages(list.id)" class="btn btn-secondary">Add</button>
    </div>
   </draggable>
 </template>
