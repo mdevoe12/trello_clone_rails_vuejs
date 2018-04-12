@@ -10,7 +10,7 @@
     <textarea v-if="editing" ref="message" v-model="message" class="form-control mb-1"></textarea>
     <button v-if="editing" v-on:click="submitMessage" class="btn btn-secondary">Add</button>
     <a v-if="editing" v-on:click="editing=false">Cancel</a>
- </div>
+  </div>
 </template>
 
 <script>
@@ -61,8 +61,6 @@ export default {
     },
     
     submitMessage: function() {
-      console.log('did it work?')
-
       var data = new FormData
       data.append("card[list_id]", this.list.id)
       data.append("card[name]", this.message)
@@ -88,15 +86,5 @@ export default {
 <style scoped>
 .dragArea {
   min-height: 20px;
-}
-
-.list {
-  background: #E2E4E6;
-  border-radius: 3px;
-  display: inline-block;
-  margin-right: 20px;
-  padding: 10px;
-  vertical-align: top;
-  width: 270px;
 }
 </style>
