@@ -19,9 +19,14 @@ export default {
   components: { draggable, list },
 
   computed: {
-    lists() {
-      return this.$store.state.lists;
-    }
+    lists: {
+      get() {
+        return this.$store.state.lists
+      },
+      set(value) {
+        this.$store.state.lists = value
+      },
+    },
   },
 
   data: function() {
@@ -39,7 +44,9 @@ export default {
     
     listMoved: function(event) {
       var data = new FormData
+      
       data.append("list[position]", event.newIndex + 1)
+    
 
       Rails.ajax({
         url: `/lists/${this.lists[event.newIndex].id}/move`,
