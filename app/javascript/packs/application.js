@@ -7,19 +7,39 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 import Vue from 'vue/dist/vue.esm'
+import Vuex from 'vuex'
 import App from '../app.vue'
 
-window.store = {}
+Vue.use(Vuex)
+// Vue.use(TurbolinksAdapter)
+
+window.store = new Vuex.Store({
+  state: {
+    lists: []
+  },
+  
+  mutations: {
+    addList(state, data) {
+      state.lists.push(data)
+    },
+    addCard(state, data) {
+      const index = state.lists.findIndex(item => item.id == data.list.id)
+      state.lists[index].cards.push(data)
+    },
+    editCard(state, data) {
+    },
+  }
+})
 
 document.addEventListener("turbolinks:load", function() {
   var element = document.querySelector("#boards")
   if (element != undefined) {
-    window.store.lists = JSON.parse(element.dataset.lists)
+    window.store.state.lists = JSON.parse(element.dataset.lists)
     
     const app = new Vue({
       el: element,
-      data: window.store,
-      template: "<App :original_lists='lists' />",
+      store: window.store,
+      template: "<App />",
       components: { App }
     })
   }
